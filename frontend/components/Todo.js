@@ -3,15 +3,6 @@ import React from 'react'
 // - takes in `todo` data and displays it to the screen
 
 export default class Todo extends React.Component {
-  // constructor(props) {
-  //   super(props)
-  //   this.completed = this.props.completed
-  //   this.hidden = this.props.hidden
-  //   this.id = this.props.id
-  //   this.name = this.props.name
-  //   this.onClick = this.props.onClick
-  //   this.onChange = this.props.onChange
-  // }
 
   render() {
     if(this.props.todo.completed && this.props.state.hidden) {return (<div></div>)}

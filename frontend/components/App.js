@@ -43,7 +43,6 @@ export default class App extends React.Component {
   
     // * change *
   onChange = e => {
-    // stores user input to state until submit
     if(e.target.type !== 'checkbox'){
       this.setState({...this.state, name: e.target.value})
     }
@@ -51,7 +50,6 @@ export default class App extends React.Component {
   
     // * submit *
   onSubmit = e => {
-    // don't reload the page
     e.preventDefault()
     // submit user input to the server
     axios.post('http://localhost:9000/api/todos', {
@@ -65,11 +63,9 @@ export default class App extends React.Component {
         name: ""
       })
     })
-    // log if something went wrong
     .catch(err => {console.log(err)})
   }
 
-  // render components
   render() {
     return (
       <div>
