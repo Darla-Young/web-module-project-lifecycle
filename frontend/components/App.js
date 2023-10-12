@@ -16,6 +16,7 @@ export default class App extends React.Component {
       list: []
     }
   }
+  // * update state *
   componentDidMount() {
     axios.get('http://localhost:9000/api/todos')
     .then(res => {
@@ -72,8 +73,8 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <TodoList onClick={this.onClick} onChange={this.onChange} state={this.state} list={this.state.list} />
-        <Form onClick={this.onClick} onChange={this.onChange} onSubmit={this.onSubmit} state={this.state} list={this.state.list} />
+        <TodoList onClick={this.onClick} onChange={this.onChange} state={this.state} />
+        <Form onClick={this.onClick} onChange={this.onChange} onSubmit={this.onSubmit} state={this.state} list={this.list} />
       </div>
     )
   }

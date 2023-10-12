@@ -5,28 +5,15 @@ import Todo from './Todo'
 // - iterates over todos array 
 //   - generates a new `<Todo />` for each element in the array
 
-let todo = []
-
 export default class TodoList extends React.Component {
-  componentDidUpdate() {
-    this.props.list.map(i => {
-      return (
-        todo.push({
-          id: i.id,
-          name: i.name,
-          completed: i.completed
-        })
-        
-        <Todo id={i.id} name={i.name} completed={i.completed} hidden={this.props.state.hidden} onClick={this.props.onClick} onChange={this.props.onChange} />
-      )
-    })
-  }
-  
   render() {
-    console.log(todo)
     return (
       <div>
-        {todo}
+        {(this.props.state.list || []).map(i => {
+          return (
+            <Todo key={i.id} todo={i} state={this.props.state} onClick={this.props.onClick} onChange={this.props.onChange} />
+          )
+        })}
       </div>
     )
   }
