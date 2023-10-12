@@ -4,18 +4,14 @@ import React from 'react'
 
 export default class Todo extends React.Component {
   render() {
-    let todo = ""
-    if(this.props.completed && this.props.hidden) {todo = ""}
+    if(this.props.completed && this.props.hidden) {return (<div></div>)}
     else {
-      todo = 
+      return(
         <li onClick={this.props.onClick} >
           <input type='checkbox' id={this.props.id} checked={this.props.completed} onChange={this.props.onChange} />
           {this.props.name}
         </li>
+      )
     }
-
-    return (
-      {todo}
-    )
   }
 }

@@ -13,7 +13,15 @@ export default class App extends React.Component {
     this.state = {
       name: "",
       hidden: false,
+      list: []
     }
+  }
+  componentDidMount() {
+    axios.get('http://localhost:9000/api/todos')
+    .then(res => {
+      this.setState({...this.state, list: res.data.data})
+    })
+    .catch(err => console.log(err))
   }
     
   // HANDLERS
@@ -64,8 +72,8 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <TodoList onClick={this.onClick} onChange={this.onChange} state={this.state} />
-        <Form onClick={this.onClick} onChange={this.onChange} onSubmit={this.onSubmit} state={this.state} />
+        <TodoList onClick={this.onClick} onChange={this.onChange} state={this.state} list={this.state.list} />
+        <Form onClick={this.onClick} onChange={this.onChange} onSubmit={this.onSubmit} state={this.state} list={this.state.list} />
       </div>
     )
   }
