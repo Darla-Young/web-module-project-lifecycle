@@ -17,10 +17,10 @@ export default class Todo extends React.Component {
     if(this.props.todo.completed && this.props.state.hidden) {return (<div></div>)}
     else {
       return(
-        <li onClick={this.props.onClick} >
+        <div onClick={this.props.onClick} >
           <input type='checkbox' id={this.props.todo.id} checked={this.props.state.completed} onChange={this.props.onChange} />
           {this.props.todo.name}
-        </li>
+        </div>
       )
     }
   }
