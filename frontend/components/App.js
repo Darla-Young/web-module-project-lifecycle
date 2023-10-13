@@ -30,15 +30,27 @@ export default class App extends React.Component {
   onClick = e => {
     const id = e.target.id
     // flips value of state.hidden
-    id === "toggle" ?
-    this.setState({
-      ...this.state, 
-      hidden: !this.state.hidden
-    }) :
-    // flips completed value of clicked todo
-    axios.patch(`http://localhost:9000/api/todos/${id}`, {
-      completed: !e.target.completed
-    })
+    if(id === "toggle") {
+      this.setState({
+        ...this.state, 
+        hidden: !this.state.hidden
+      })
+    } else {
+      // flips completed value of clicked todo
+      axios.patch(`http://localhost:9000/api/todos/${id}`, {
+        completed: !e.target.completed
+      })
+      // updates state
+      axios.get('http://localhost:9000/api/todos')
+      .then(res => {
+        this.setState({
+          ...this.state, 
+          name: "",
+          list: res.data.data
+        })
+      })
+      .catch(err => console.log(err))
+    }
   }
   
     // * change *
@@ -56,21 +68,23 @@ export default class App extends React.Component {
       name: this.state.name, 
       completed: false
     })
-    // prep state for next entry
-    .then(() => {
+    // update list & prep state for next entry
+    axios.get('http://localhost:9000/api/todos')
+    .then(res => {
       this.setState({
-        ...this.setState,
-        name: ""
+        ...this.state, 
+        name: "",
+        list: res.data.data
       })
     })
-    .catch(err => {console.log(err)})
+    .catch(err => console.log(err))
   }
 
   render() {
     return (
       <div>
         <TodoList onClick={this.onClick} onChange={this.onChange} state={this.state} />
-        <Form onClick={this.onClick} onChange={this.onChange} onSubmit={this.onSubmit} state={this.state} list={this.list} />
+        <Form onClick={this.onClick} onChange={this.onChange} onSubmit={this.onSubmit} state={this.state} />
       </div>
     )
   }

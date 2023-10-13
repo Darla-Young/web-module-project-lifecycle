@@ -5,14 +5,11 @@ import React from 'react'
 export default class Todo extends React.Component {
 
   render() {
-    if(this.props.todo.completed && this.props.state.hidden) {return (<div></div>)}
-    else {
       return(
         <div onClick={this.props.onClick} >
-          <input type='checkbox' id={this.props.todo.id} checked={this.props.state.completed} onChange={this.props.onChange} />
+          <input type='checkbox' id={this.props.todo.id} checked={this.props.todo.completed} onChange={this.props.onChange} />
           {this.props.todo.name}
         </div>
       )
-    }
   }
 }

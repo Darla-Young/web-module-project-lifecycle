@@ -11,6 +11,7 @@ export default class TodoList extends React.Component {
       <div>
         {(this.props.state.list || []).map(i => {
           return (
+            i.completed && this.props.state.hidden ? null :
             <Todo key={i.id} todo={i} state={this.props.state} onClick={this.props.onClick} onChange={this.props.onChange} />
           )
         })}
